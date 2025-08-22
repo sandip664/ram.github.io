@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NovaLabs — We Build Delightful Fake Apps</title>
+  <meta name="description" content="A slick one‑page fake startup website you can host on GitHub Pages. Swap the text and you're live." />
+
+  <!-- Open Graph (nice when you share the link) -->
+  <meta property="og:title" content="NovaLabs — We Build Delightful Fake Apps">
+  <meta property="og:description" content="A slick one‑page fake startup website for GitHub Pages.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://dummyimage.com/1200x630/111827/ffffff&text=NovaLabs">
+  <meta name="theme-color" content="#0ea5e9">
+
+  <style>
+    :root {
+      --bg: #0b1220;    /* deep slate */
+      --card: #0f172a;  /* slate-900 */
+      --muted: #94a3b8; /* slate-400 */
+      --text: #e2e8f0;  /* slate-200 */
+      --brand: #0ea5e9; /* sky-500 */
+      --brand-2: #22d3ee; /* cyan-400 */
+      --accent: #a78bfa; /* violet-400 */
+      --success: #10b981; /* emerald-500 */
+      --danger: #ef4444;  /* red-500 */
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji"; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* Layout helpers */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .btn { display:inline-flex; align-items:center; gap:.5rem; padding:.85rem 1.1rem; border-radius:14px; background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#04111f; font-weight:700; border:none; cursor:pointer; box-shadow: 0 10px 30px rgba(34,211,238,.25); transition: transform .15s ease, box-shadow .2s ease; }
+    .btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 40px rgba(34,211,238,.35); }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid rgba(226,232,240,.15); box-shadow:none; }
+
+    /* Nav */
+    header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(8px); background: rgba(11,18,32,.6); border-bottom: 1px solid rgba(148,163,184,.08); }
+    .nav { display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .brand { display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px; }
+    .logo { width:28px; height:28px; border-radius:8px; background: conic-gradient(from 210deg, var(--brand), var(--accent), var(--brand-2)); box-shadow: inset 0 0 20px rgba(255,255,255,.15), 0 6px 20px rgba(79,70,229,.35); }
+    nav a { opacity:.85; }
+    .links { display:flex; gap:1.1rem; align-items:center; }
+    .menu-btn { display:none; background:none; border:none; color:var(--text); font-size:1.25rem; }
+
+    /* Hero */
+    .hero { position:relative; padding: 88px 0 48px; overflow: hidden; }
+    .hero::before {
+      content:""; position:absolute; inset:-30% -10% auto -10%; height: 380px; background: radial-gradient(closest-side, rgba(34,211,238,.15), transparent 65%);
+      transform: translateY(-20px);
+    }
+    .badge { display:inline-flex; align-items:center; gap:.5rem; padding:.35rem .6rem; border-radius:999px; border:1px solid rgba(148,163,184,.18); color: var(--muted); font-size:.85rem; }
+    .title { font-size: clamp(2.2rem, 5vw, 3.5rem); line-height: 1.05; margin: .6rem 0; letter-spacing: -.02em; }
+    .subtitle { color: var(--muted); max-width: 720px; font-size: clamp(1rem, 2.5vw, 1.1rem); }
+    .hero-cta { display:flex; gap:.8rem; flex-wrap:wrap; margin-top: 1.2rem; }
+    .hero-visual { margin-top: 48px; background: linear-gradient(180deg, rgba(148,163,184,.08), transparent); border: 1px solid rgba(148,163,184,.14); border-radius: 22px; padding: 18px; box-shadow: 0 40px 80px rgba(0,0,0,.35); }
+
+    .code-window { background: #0a0f1c; border-radius: 16px; padding: 16px; border: 1px solid rgba(148,163,184,.12); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; font-size: 13px; color: #e5e7eb; position: relative; }
+    .dots { display:flex; gap:8px; position:absolute; top:10px; left:12px; }
+    .dot { width:10px; height:10px; border-radius:999px; background:#ef4444; }
+    .dot:nth-child(2){ background:#f59e0b; }
+    .dot:nth-child(3){ background:#10b981; }
+
+    pre { margin: 24px 0 0; white-space: pre-wrap; word-break: break-word; }
+    code .hl { color: var(--brand-2); }
+
+    /* Sections */
+    section { padding: 72px 0; }
+    .grid { display:grid; gap:24px; }
+    .features { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+    .card { background: linear-gradient(180deg, rgba(148,163,184,.06), rgba(148,163,184,.03)); border: 1px solid rgba(148,163,184,.12); border-radius: 18px; padding: 20px; transition: transform .15s ease, border-color .2s ease; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(34,211,238,.35); }
+    .kicker { color: var(--brand-2); font-weight: 700; text-transform: uppercase; font-size: .85rem; letter-spacing:.1em; }
+    .h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin:.25rem 0 10px; }
+    .muted { color: var(--muted); }
+
+    /* Testimonials */
+    .testi { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .quote { font-size: 1.05rem; }
+    .avatar { width:36px; height:36px; border-radius:999px; background: linear-gradient(135deg, var(--brand), var(--accent)); display:inline-block; margin-right:.6rem; }
+
+    /* Pricing */
+    .pricing { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .price { font-size: 2rem; font-weight: 900; }
+
+    /* Contact */
+    form { display:grid; gap:12px; }
+    input, textarea { background:#0a1021; border:1px solid rgba(148,163,184,.18); color:var(--text); border-radius:12px; padding:12px 14px; font: inherit; }
+    textarea { min-height: 120px; resize: vertical; }
+
+    /* Footer */
+    footer { padding: 48px 0 64px; color: var(--muted); border-top: 1px solid rgba(148,163,184,.12); }
+
+    /* Small screens */
+    @media (max-width: 760px){
+      .links { display:none; position:absolute; top:64px; right:0; background: rgba(11,18,32,.95); border-left:1px solid rgba(148,163,184,.12); border-bottom:1px solid rgba(148,163,184,.12); padding: 12px 16px; border-bottom-left-radius: 12px; }
+      .links a { display:block; padding:10px 4px; }
+      .menu-btn { display:block; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand"><span class="logo"></span> <span>NovaLabs</span></a>
+      <nav>
+        <button class="menu-btn" aria-label="Open Menu" onclick="toggleMenu()">☰</button>
+        <div class="links" id="navLinks">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#contact" class="btn" style="margin-left:.4rem;">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge">🚀 Totally Real Startup • Est. 2025</span>
+      <h1 class="title">We build <span style="background:linear-gradient(90deg,var(--brand),var(--accent)); -webkit-background-clip:text; background-clip:text; color:transparent;">delightful fake apps</span> that wow your imaginary users.</h1>
+      <p class="subtitle">Use this template as your GitHub Pages site. It’s a single HTML file with slick styles, responsive layout, and zero dependencies. Replace the text and you’re good to go.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#pricing">Get Started</a>
+        <a class="btn ghost" href="#features">See Features</a>
+      </div>
+
+      <div class="hero-visual">
+        <div class="code-window">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+<pre><code>&lt;<span class="hl">script</span>&gt;
+  // Fake product demo
+  const product = { name: 'NovaLabs Cloud', status: '✨ live', users: 4200 };
+  console.log(`Welcome to ${product.name}! Status: ${product.status}`);
+&lt;/<span class="hl">script</span>&gt;</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section id="features">
+    <div class="container">
+      <div style="margin-bottom: 22px;">
+        <div class="kicker">Features</div>
+        <h2 class="h2">Everything you need to impress… no backend required</h2>
+        <p class="muted">This is a front‑end only template. Swap the copy, add your links, and ship.</p>
+      </div>
+
+      <div class="grid features">
+        <div class="card">
+          <h3>Fast by default</h3>
+          <p class="muted">No frameworks, no builds. Just HTML + CSS + tiny JS, so it loads quick on GitHub Pages.</p>
+        </div>
+        <div class="card">
+          <h3>Responsive layout</h3>
+          <p class="muted">Looks great on phones, tablets, and big screens using modern CSS grid & flex.</p>
+        </div>
+        <div class="card">
+          <h3>Pretty gradients</h3>
+          <p class="muted">Tasteful glow, soft shadows, and gradients that say “we raise imaginary Series A”.</p>
+        </div>
+        <div class="card">
+          <h3>Copy‑paste ready</h3>
+          <p class="muted">Change the brand name, colors, and sections to fit a portfolio, startup, or project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section>
+    <div class="container">
+      <div class="kicker">Nice words</div>
+      <h2 class="h2">People are saying things</h2>
+      <div class="grid testi">
+        <div class="card">
+          <p class="quote">“I shipped a convincing demo in 10 minutes. Investors were… intrigued.”</p>
+          <p class="muted"><span class="avatar"></span> Alex P., Founder</p>
+        </div>
+        <div class="card">
+          <p class="quote">“Clean design, great defaults. Perfect for my portfolio.”</p>
+          <p class="muted"><span class="avatar"></span> Samira K., Developer</p>
+        </div>
+        <div class="card">
+          <p class="quote">“Finally, a template I don’t need to fix for mobile.”</p>
+          <p class="muted"><span class="avatar"></span> Rohan S., Designer</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing">
+    <div class="container">
+      <div class="kicker">Pricing</div>
+      <h2 class="h2">So simple it’s suspicious</h2>
+      <div class="grid pricing">
+        <div class="card">
+          <h3>Hobby</h3>
+          <p class="muted">For personal projects</p>
+          <div class="price">$0</div>
+          <ul class="muted">
+            <li>✓ Single page</li>
+            <li>✓ Email link</li>
+            <li>✓ MIT license</li>
+          </ul>
+          <a class="btn" href="#contact">Choose Hobby</a>
+        </div>
+        <div class="card" style="border-color: rgba(34,211,238,.45);">
+          <h3>Pro</h3>
+          <p class="muted">For ambitious portfolios</p>
+          <div class="price">$9</div>
+          <ul class="muted">
+            <li>✓ Multi‑section</li>
+            <li>✓ Priority vibes</li>
+            <li>✓ Faster gradients</li>
+          </ul>
+          <a class="btn" href="#contact">Choose Pro</a>
+        </div>
+        <div class="card">
+          <h3>Enterprise</h3>
+          <p class="muted">For very serious demos</p>
+          <div class="price">Custom</div>
+          <ul class="muted">
+            <li>✓ Custom copy</li>
+            <li>✓ Unlimited emojis</li>
+            <li>✓ 24/7 pretend support</li>
+          </ul>
+          <a class="btn" href="#contact">Talk to Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="kicker">About</div>
+      <h2 class="h2">Who we (pretend to) are</h2>
+      <p class="muted">NovaLabs is a pretend studio crafting fake products for real presentations. We help students, founders, and tinkerers make ideas look polished without spinning up servers.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="kicker">Contact</div>
+      <h2 class="h2">Slide into our inbox</h2>
+      <p class="muted">This form uses a <strong>mailto:</strong> link (no backend). Replace the address with yours, or connect to a service like Formspree.</p>
+
+      <form id="contactForm">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Email address" required>
+        <textarea name="message" placeholder="Tell us about your totally legit project…" required></textarea>
+        <button class="btn" type="submit">Send Message</button>
+        <p id="formMsg" class="muted" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div style="display:flex; align-items:center; gap:.6rem;">
+        <span class="logo"></span>
+        <span>© <span id="year"></span> NovaLabs. All rights reserved (not really).</span>
+      </div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <a class="muted" href="#">Privacy</a>
+        <a class="muted" href="#">Terms</a>
+        <a class="muted" href="#">Twitter</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    function toggleMenu(){
+      const nav = document.getElementById('navLinks');
+      const visible = getComputedStyle(nav).display !== 'none';
+      nav.style.display = visible ? 'none' : 'block';
+    }
+
+    // Contact form: mailto fallback (no backend)
+    const form = document.getElementById('contactForm');
+    const msg = document.getElementById('formMsg');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = encodeURIComponent(data.get('name'));
+      const email = encodeURIComponent(data.get('email'));
+      const body = encodeURIComponent(data.get('message'));
+
+      // TODO: Replace with your email address
+      const mail = `mailto:you@example.com?subject=Website%20Inquiry%20from%20${name}&body=${body}%0A%0AReply%20to:%20${email}`;
+      window.location.href = mail;
+      msg.textContent = 'Opening your email app…';
+    });
+
+    // Current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
